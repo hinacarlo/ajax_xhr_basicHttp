@@ -20,6 +20,16 @@ class basicHTTP {
     this.http.send();
   }
   // Make an HTTP POST Request
+  post(url, data, callback) {
+    this.http.open("POST", url, true);
+    this.http.setRequestHeader("Content-type", "application/json");
+
+    this.http.onload = () => {
+      callback(null, this.http.responseText);
+    };
+
+    this.http.send(JSON.stringify(data));
+  }
   // Make an HTTP PUT Request
   // Make an HTTP DELETE Request
 }
