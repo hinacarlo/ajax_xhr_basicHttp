@@ -41,6 +41,17 @@ class basicHTTP {
 
     this.http.send(JSON.stringify(data));
   }
-
   // Make an HTTP DELETE Request
+  delete(url, callback) {
+    this.http.open("DELETE", url, true);
+    this.http.onload = () => {
+      if (this.http.status === 200) {
+        callback(null, "POST DELETED");
+      } else {
+        callback("ERROR: " + this.http.responseText);
+      }
+    };
+
+    this.http.send();
+  }
 }
